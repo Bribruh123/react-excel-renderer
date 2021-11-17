@@ -46,17 +46,7 @@ export function ExcelRenderer(file, callback) {
 
 		var data = []
 
-		for (const sheet in of wb.SheetNames){
-			console.log(sheet)
-			
-			var ws = wb.Sheets[sheet];
-
-			/* Convert array of arrays */
-			var json = XLSX.utils.sheet_to_json(ws, { header: 1 });
-			var cols = make_cols(ws["!ref"]);
-			
-			data.push({ rows: json, cols: cols })
-		}
+		
 
 
 
