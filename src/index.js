@@ -44,20 +44,21 @@ export function ExcelRenderer(file, callback) {
         var bstr = e.target.result;
         var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
 
+		var data = []
+
 		for (const sheet in of wb.SheetNames){
 			console.log(sheet)
+			
+			var ws = wb.Sheets[sheet];
+
+			/* Convert array of arrays */
+			var json = XLSX.utils.sheet_to_json(ws, { header: 1 });
+			var cols = make_cols(ws["!ref"]);
+			
+			data.push({ rows: json, cols: cols })
 		}
 
 
-        /* Get first worksheet */
-        var wsname = wb.SheetNames[0];
-        var ws = wb.Sheets[wsname];
-
-        /* Convert array of arrays */
-        var json = XLSX.utils.sheet_to_json(ws, { header: 1 });
-        var cols = make_cols(ws["!ref"]);
-
-        var data = { rows: json, cols: cols };
 
         resolve(data);
         return callback(null, data);
