@@ -44,6 +44,11 @@ export function ExcelRenderer(file, callback) {
         var bstr = e.target.result;
         var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
 
+		for (const sheet in of wb.SheetNames){
+			console.log(sheet)
+		}
+
+
         /* Get first worksheet */
         var wsname = wb.SheetNames[0];
         var ws = wb.Sheets[wsname];
