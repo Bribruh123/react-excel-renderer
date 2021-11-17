@@ -46,7 +46,7 @@ export function ExcelRenderer(file, callback) {
 
 		var data = []
 
-		for (const sheet in of wb.SheetNames){
+		for (const sheet of wb.SheetNames){
 			//console.log(sheet)
 			
 			var ws = wb.Sheets[sheet];
